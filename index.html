@@ -50,7 +50,6 @@
             filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.5));
         }
 
-        /* Contador Neon Atualizado */
         .countdown-container {
             background: rgba(0,0,0,0.7);
             padding: 20px;
@@ -138,40 +137,35 @@
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .token-slider {
-            width: 100%;
-            height: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-
-        .token-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .purchase-info div {
-            margin: 10px 0;
-            padding: 10px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-        }
-
-        .payment-methods {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+        /* Estilos para Whitepaper */
+        .whitepaper-content {
             margin-top: 25px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .whitepaper-summary {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .whitepaper-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .whitepaper-summary li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        embed {
+            border: 2px solid var(--neon-cyan);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            margin: 20px 0;
         }
 
         @media (max-width: 768px) {
@@ -181,7 +175,7 @@
             }
             .cta-button { width: 100%; }
             .logo-container { width: 120px; height: 120px; }
-            .payment-methods .cta-button { width: 100%; }
+            embed { height: 400px; }
         }
     </style>
 </head>
@@ -206,7 +200,10 @@
                 <button class="cta-button" onclick="showSection('tokenomics')">
                     <i class="fas fa-chart-pie"></i> Tokenomics
                 </button>
-                <a href="https://wa.me/351923312940" class="cta-button" style="background: #25D366;" target="_blank">
+                <button class="cta-button" onclick="showSection('whitepaper')">
+                    <i class="fas fa-file-contract"></i> Whitepaper
+                </button>
+                <a href="https://wa.me/351912222222" class="cta-button" style="background: #25D366;" target="_blank">
                     <i class="fab fa-whatsapp"></i> Suporte
                 </a>
             </div>
@@ -285,6 +282,32 @@
                         <i class="fas fa-exclamation-triangle"></i> Limite máximo: 10.5M WALKING
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nova Seção Whitepaper -->
+    <div id="whitepaperSection" class="info-section">
+        <button class="cta-button" onclick="goBack()">← Voltar</button>
+        <div class="tokenomics-card">
+            <h2>📄 Whitepaper Oficial</h2>
+            
+            <div class="whitepaper-content">
+                <div class="whitepaper-summary">
+                    <h3>📌 Resumo Executivo</h3>
+                    <ul>
+                        <li>Visão Geral do Projeto</li>
+                        <li>Roadmap Tecnológico</li>
+                        <li>Modelo Econômico Sustentável</li>
+                        <li>Estratégia de Implementação</li>
+                    </ul>
+                </div>
+
+                <embed src="walking-whitepaper.pdf" type="application/pdf" width="100%" height="600px">
+                
+                <a href="walking-whitepaper.pdf" download class="cta-button">
+                    <i class="fas fa-download"></i> Baixar PDF Completo
+                </a>
             </div>
         </div>
     </div>
