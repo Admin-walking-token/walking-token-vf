@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Walking Token - Pré-Lançamento 2025</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Stripe.js é necessário para a integração -->
   <script src="https://js.stripe.com/v3/"></script>
   <style>
     :root {
@@ -28,6 +29,7 @@
     }
     /* Cabeçalho e Hero */
     .hero {
+      position: relative;
       padding: 40px 20px;
       text-align: center;
       background: rgba(0,0,0,0.7);
@@ -38,8 +40,9 @@
     .logo-container {
       width: 150px;
       height: 150px;
-      margin: 0 auto 20px;
-      animation: spin 5s linear infinite;
+      position: relative;
+      margin-bottom: 20px;
+      animation: slideFade 20s linear infinite;
     }
     .main-logo {
       width: 100%;
@@ -47,9 +50,32 @@
       object-fit: contain;
       filter: drop-shadow(0 0 15px rgba(255, 193, 7, 0.5));
     }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    /* Animação: desliza da esquerda para a direita com fade out e fade in */
+    @keyframes slideFade {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      80% {
+        transform: translateX(calc(100vw - 150px));
+        opacity: 1;
+      }
+      85% {
+        transform: translateX(calc(100vw - 150px));
+        opacity: 0;
+      }
+      86% {
+        transform: translateX(0);
+        opacity: 0;
+      }
+      90% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
     .main-actions {
       display: flex;
@@ -188,7 +214,7 @@
         <button class="cta-button" onclick="showSection('purchase')"><i class="fas fa-coins"></i> Comprar</button>
         <button class="cta-button" onclick="showSection('tokenomics')"><i class="fas fa-chart-pie"></i> Tokenomics</button>
         <button class="cta-button" onclick="showSection('whitepaper')"><i class="fas fa-file-contract"></i> Whitepaper</button>
-        <a href="https://wa.me/351923312940" class="cta-button" style="background: #25D366;" target="_blank"><i class="fab fa-whatsapp"></i> Suporte</a>
+        <a href="https://wa.me/351912222222" class="cta-button" style="background: #25D366;" target="_blank"><i class="fab fa-whatsapp"></i> Suporte</a>
         <button class="cta-button" onclick="showSection('chatRegister')"><i class="fas fa-comments"></i> Chat Online</button>
       </div>
     </section>
@@ -209,7 +235,8 @@
       </div>
       <div class="payment-methods">
         <button class="cta-button" onclick="alert('Pagamento com Criptomoedas')"><i class="fab fa-bitcoin"></i> Criptomoedas</button>
-        <button class="cta-button" onclick="alert('Pagamento com Cartão')"><i class="fas fa-credit-card"></i> Cartão</button>
+        <!-- Botão de pagamento com cartão utilizando Stripe -->
+        <button class="cta-button" onclick="payWithCard()"><i class="fas fa-credit-card"></i> Cartão</button>
       </div>
     </div>
   </div>
@@ -290,6 +317,19 @@
   </div>
   
   <script>
+    // Inicializa o Stripe com sua chave pública (substitua pela sua chave real)
+    var stripe = Stripe("pk_live_51R6ituAiVqaHv9W0jEQsrVg2cG1A4HWQK1mMNFOvNAy60LLou1bs3fxNIaK8QZPgKuShweBHLqyAxyLF9OaUob9N00vY3S4aFf");
+    
+    // Função para redirecionar para o Stripe Checkout ao clicar no botão de Cartão
+    function payWithCard() {
+      fetch("checkout.php", { method: "POST" })
+        .then(response => response.json())
+        .then(session => {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .catch(error => console.error("Erro:", error));
+    }
+    
     // Variáveis para o sistema de pré-venda
     const PRESALE_START = new Date('2025-03-26T00:00:00');
     const PRESALE_DAYS = 9;
@@ -416,4 +456,3 @@
   </script>
 </body>
 </html>
-
